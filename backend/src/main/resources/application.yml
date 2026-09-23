@@ -1,0 +1,46 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: feepay-backend
+  profiles:
+    active: h2
+  jpa:
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/feepay_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+# Application Configuration (Team 1, 2, 3)
+app:
+  jwt:
+    # 256-bit secure secret key for HMAC-SHA256 signature verification (CN: Cryptographic Token Auth)
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration-ms: 86400000 # 24 Hours
+  razorpay:
+    # Team 2: Razorpay Test Mode Credentials (Simulated payment processing)
+    key-id: rzp_test_mmcoeDemoKey123
+    key-secret: testSecretPlaceholder456
+    mock-mode: true # Set to true to allow in-browser mock testing without internet gateway dependency
+
+# OpenAPI / Swagger Documentation
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+    tags-sorter: alpha
+    operations-sorter: alpha
